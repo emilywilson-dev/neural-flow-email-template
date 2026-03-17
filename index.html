@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+	<meta name="format-detection" content="telephone=no, date=no, address=no, email=no, url=no">
+	<meta name="x-apple-disable-message-reformatting">
+	<meta name="color-scheme" content="light dark">
+	<meta name="supported-color-schemes" content="light dark">
+	<title>Neural Flow</title>
+
+   <!--  DPI + document settings -->
+
+	<!--[if mso]>
+	<noscript>
+		<xml>
+			<o:OfficeDocumentSettings>
+				<o:PixelsPerInch>96</o:PixelsPerInch>
+			</o:OfficeDocumentSettings>
+		</xml>
+	</noscript>
+	<![endif]-->
+
+
+	<!--  Force MSO font size -->
+
+	<!--[if gte mso 9]>
+	<style type="text/css">
+		table, td {font-size: 16px !important;}
+	</style>
+	<![endif]-->
+
+
+	<style>
+     
+    /* --- RESET + BASE FIXES --- */
+		html, body {
+			margin: 0 !important;
+			padding: 0 !important;
+			width: 100% !important;
+			height: 100% !important;
+		}
+
+		body {
+			min-width: 100% !important;
+			font-family: Verdana, Tahoma, sans-serif, Helvetica, sans-serif;
+			background-color: #dde0e1;
+         -webkit-text-size-adjust: 100%;
+         -ms-text-size-adjust: 100%;
+		}
+
+		table {
+			border-spacing: 0 !important;
+			border-collapse: collapse !important;
+			mso-table-lspace: 0pt !important;
+			mso-table-rspace: 0pt !important;
+		}
+
+		img {
+			border: 0;
+			-ms-interpolation-mode: bicubic;
+		}
+
+		a {
+			text-decoration: none;
+			font-size: 16px;
+		}
+
+		p { 
+			margin: 0;
+			font-size: 16px;
+      line-height: 1.5;
+			mso-line-height-rule: exactly;
+		}
+    
+
+    h1 {
+      margin: 0;
+    }
+
+    h1, h2, h3 {
+      line-height: 1.25;
+    }
+
+		.ExternalClass { width: 100%; }
+		.ExternalClass p,
+		.ExternalClass span,
+		.ExternalClass font,
+		.ExternalClass td,
+		.ExternalClass div {
+			line-height: 100%;
+		}
+
+		/* --- GMAIL SUPPORT --- */
+		u + .body .outer-container { background: #dde0e1 !important; }
+
+		.apple-link a { color: inherit !important; text-decoration: none !important; }
+
+    a[x-apple-data-detectors] {
+   color: inherit !important;
+   text-decoration: none !important;
+}
+
+		.inner-container {
+			width: 100% !important;
+			max-width: 600px !important;
+		}
+
+		/* --- RESPONSIVE MOBILE STYLES --- */
+		@media screen and (max-width: 600px) {
+			body {
+				box-sizing: border-box !important;
+			} 
+
+
+			/* Stack columns vertically on mobile */
+			.stack-column {
+				display: block !important;
+				width: 100% !important;
+				max-width: 100% !important;
+				padding-bottom: 20px !important;
+				padding-left: 0 !important;
+				padding-right: 0 !important;
+				text-align: center !important;
+			}
+
+			.stat-column {
+			border: none !important;
+		}
+
+		.stat-column:last-child {
+  		border:none !important;
+}
+
+			.stack-column:last-child {
+				padding-bottom: 0 !important;
+			}
+
+			.stack-column > table {
+				width: 100% !important;
+				max-width: 100% !important;
+				margin: 0 auto !important;
+			}
+			
+			/* Center content when stacked */
+			.stack-column td,
+			.stack-column p,
+			.stack-column h1{
+				text-align: center !important;
+			}
+
+			.stack-column img {
+				display: block !important;
+				margin: 0 auto !important;
+			}
+
+			
+			/* Force images to be responsive */
+			img {
+				max-width: 100% !important;
+				height: auto !important;
+				width: auto !important;
+			}
+
+			/* Ensure inner container scales */
+			.inner-container {
+				width: 100% !important;
+				max-width: 100% !important;
+			}
+
+			#logo {
+				width: 45px !important;
+				max-width: 45px !important;
+			}
+
+			#title {
+				font-size: 24px !important;
+			}
+
+			.button {
+				width: 85% !important;
+				max-width: 85% !important;
+				padding: 15px !important;
+				font-size: 16px !important;
+			}
+
+			.card {
+				padding-left: 10px !important;
+				padding-right: 10px !important;
+				box-sizing: border-box !important;
+			}
+
+			.stat-column {
+				border-right: none !important;
+				padding-bottom: 20px !important;
+				box-sizing: border-box !important;
+				width: 100% !important;
+				max-width: 100% !important;
+				display: block !important;
+				text-align: center !important;
+				margin-bottom: 20px !important;
+				padding-left: 0px !important;
+				padding-right: 0 !important;
+			}
+
+
+
+		}
+
+		/* --- DARK MODE --- */
+		:root {
+			color-scheme: light dark;
+			supported-color-schemes: light dark;
+		}
+
+
+    
+
+	</style>
+
+	
+
+</head>
+<body role="article" aria-roledescription="email" style="margin:0; padding:0; background-color:#dde0e1;" lang="en">
+   <!--  Outlook wrapper full-width background table -->
+
+   <!--[if mso]>
+      <table role="presentation" width="100%" style="background-color:#dde0e1;">
+      <tr><td>
+   <![endif]-->
+
+      <!-- OUTER WRAPPER -->
+      <table role="presentation" width="100%" class="outer-container" style="background-color:#dde0e1; width:100%;">
+         <tr>
+            <td align="center">
+               <!-- INNER WRAPPER -->
+               <table role="presentation" bgcolor="#080808" class="inner-container" align="center" width="600" style="width:600px; background-color: #080808; max-width:600px; margin: 0 auto; color: #ffffff !important;">
+                  <tr>
+                     <td>
+                        <!-- PREHEADER (hidden) -->
+                        <div style="display:none !important; font-size:1px; line-height:1px; max-height:0; max-width:0; opacity:0; overflow:hidden; mso-hide:all;">
+                           The future of generative AI is here. Unlock the power of neural networks with our latest update.
+                        </div>
+												
+												<!-- Spacer text to block template bleed -->
+												<div style="display:none;font-size:1px;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;">
+													&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
+												</div>
+
+												<table role="presentation" align="center" width="100%" border="0" cellpadding="0" cellspacing="0">
+													<tr>
+														<td style="background: #c6fe67; width: 100%; height: 20px;"></td>
+													</tr>
+												</table>
+
+                        <!--HEADER-->
+                        <table role="presentation" align="center" width="100%" border="0" cellpadding="0" cellspacing="0">
+													<tr>
+														<td align="center" style="padding: 20px; border-bottom: 1px solid #333333;">
+													<table role="presentation" border="0" cellpadding="0" cellspacing="0">
+														<tr>
+															<td valign="middle" style="padding-right: 10px;">
+																<img role="img" id="logo" width="55" style="display: block; width: 55px; max-width: 55px; border-radius: 10px;" src="https://raw.githubusercontent.com/emilywilson-dev/neural-flow-live-images/main/logo.png" alt="NeuralFlow Logo">
+															</td>
+															<td valign="middle" style="padding: 0;">
+																<h1 class="dark-mode" style="font-weight: 500;">NeuralFlow</h1>
+															</td>
+														</tr>
+													</table>
+												</td>
+													</tr>
+										
+														
+                          
+                        </table>
+
+												<!--HERO-->
+												<table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
+													<tr>
+														<td align="center" style="padding: 20px;">
+															<p class="dark-mode" style="font-size: 30px; max-width: 450px; font-weight: 500;">The Future of <span style="color:#c6fe67;">Generative AI</span> is Here.</p>
+														</td>
+													</tr>
+													<tr>
+														<td align="center">
+															<p style="font-size: 20px; max-width: 500px; line-height: 35px;">Unlock the power of neural networks with our latest update. Faster processing, smarter insights, and seamless integration.</p>
+														</td>
+													</tr>
+													<tr>
+														<td align="center" style="padding: 20px;">
+															<img role="img" width="500" style="width: 100%; max-width: 500px; border-radius: 10px;" src="https://raw.githubusercontent.com/emilywilson-dev/neural-flow-live-images/main/hero-image.jpg" alt="Unlock the power of neural networks">
+														</td>
+													</tr>
+													<tr>
+														<td align="center" style="padding: 20px;">
+															<!--outlook button-->
+															<!--[if mso]>
+																<table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center">
+																	<tr>
+																		<td align="center">
+																			<v:roundrect 
+																				xmlns:v="urn:schemas-microsoft-com:vml" 
+																				xmlns:w="urn:schemas-microsoft-com:office:word"
+																				href="https://example.com" 
+																				style="height:60px;v-text-anchor:middle;width:270px;"  
+																				arcsize="10%"
+																				stroke="f" 
+																				fillcolor="#c6fe67"> 
+																				<w:anchorlock/> 
+																				<center style="color:#000000; font-family: Verdana, Tahoma, sans-serif, Helvetica, sans-serif; font-size:20px; font-weight:550;">
+																					Explore Version 2.0
+																				</center> 
+																			</v:roundrect>
+																		</td>
+																	</tr>
+																</table>
+																<![endif]-->
+															<!--[if !mso]> <!---->
+															<a class="button" style="background:#c6fe67; color: #000000; padding: 20px; border-radius: 10px; font-size: 20px; font-weight: 550;" href="https://example.com">Explore Version 2.0</a>
+															<!--<![endif]-->
+														</td>
+													</tr>
+													<!--row spacer-->
+													<tr>
+														<td style="border-bottom: 1px solid #333333;">
+															<table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
+																<tr>
+																	<td height="30" style="font-size:0; line-height:0;">
+																		
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+												</table>
+
+												<table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
+													<tr>
+														<td align="center" style="padding-top: 20px;">
+															<p class="dark-mode" style="font-size: 24px; font-weight: 500; padding-left: 20px; text-align: center;">What's New in NeuralFlow</p>
+														</td>
+													</tr>
+												</table>
+
+												<!--what's new columns-->
+												<table align="center" role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
+													<tr>
+														<!--column 1-->
+														<td valign="top" class="stack-column card" style="padding: 20px;">
+															<table role="presentation" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 285px;">
+																<tr>
+																	<td style="border: 1px solid #c6fe67; height: 255px;">
+																		<table>
+																			<tr>
+																				<td style="padding: 20px;">
+																					<img role="img" width="32" style="width: 100%; max-width: 32px; display: block;" src="https://raw.githubusercontent.com/emilywilson-dev/neural-flow-live-images/main/processing.png" alt="Real-time processing">
+																				</td>
+																			</tr>
+																			<tr>
+																				<td style="padding-left: 20px;">
+																					<p class="dark-mode" style="font-size: 20px; font-weight: 550;">Real-time Processing</p>
+																				</td>
+																			</tr>
+																			<tr>
+																				<td style="padding-left: 20px; padding-bottom: 20px; padding-top: 20px; padding-right: 20px;">
+																					<p style="font-size: 16px;">Latency reduced by 40% for instant AI responses across all endpoints.</p>
+																				</td>
+																			</tr>
+																		</table>
+																		
+																	</td>
+																</tr>
+															</table>
+														</td>
+
+														<!--column 2-->
+														<td valign="top" class="stack-column card" style="padding: 20px">
+															<table role="presentation" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 285px;">
+																<tr>
+																	<td style="border: 1px solid #c6fe67; height: 255px;">
+																		<table>
+																			<tr>
+																				<td style="padding: 20px;">
+																					<img role="img" width="32" style="width: 100%; max-width: 32px; display: block;" src="https://raw.githubusercontent.com/emilywilson-dev/neural-flow-live-images/main/asterik.png" alt="Expanded Context">
+																				</td>
+																			</tr>
+																			<tr>
+																				<td style="padding-left: 20px; padding-bottom: 20px;">
+																					<p class="dark-mode" style="font-size: 20px; font-weight: 550;">Expanded Context</p>
+																				</td>
+																			</tr>
+																			<tr>
+																				<td style="padding-left: 20px; padding-bottom: 22px; padding-top: 20px; padding-right: 20px;">
+																					<p style="font-size: 16px;">Process up to 100k tokens in a single session with improved recall.</p>
+																				</td>
+																			</tr>
+																		</table>
+																		
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+												</table>
+
+												<!--stats section-->
+												<table align="center" role="presentation" border="0" cellpadding="0" cellspacing="0">
+													<tr>
+														<td style="padding: 20px;">
+															<table align="center" role="presentation" border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 555px;">
+																<tr>
+																	<td style="border: 1px solid #333333; border-radius: 10px; padding: 20px;">
+																		<table>
+																			<tr>
+																				<!--column 1-->
+																				<td class="stack-column stat-column" align="center" style="border-right: 1px solid #333333; padding: 0 20px;">
+																					<table role="presentation" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 185px;">
+																						<tr>
+																							<td align="center">
+																								<p style="color:#c6fe67; font-size: 25px; font-weight: 600; text-align: center;">99.9%</p>
+																							</td>
+																						</tr>
+																						<tr>
+																							<td align="center">
+																								<p style="color:#a0a0a0; font-size: 18px; text-align: center;">UPTIME</p>
+																							</td>
+																						</tr>
+																					</table>
+																				</td>
+
+																				<!--column 2-->
+																				<td class="stack-column stat-column" align="center" style="border-right: 1px solid #333333; padding: 0 20px;">
+																					<table role="presentation" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 185px;">
+																						<tr>
+																							<td align="center">
+																								<p class="stat-content" style="color:#c6fe67; font-size: 25px; font-weight: 600; text-align: center;">50M+</p>
+																							</td>
+																						</tr>
+																						<tr>
+																							<td align="center">
+																								<p style="color:#a0a0a0; font-size: 18px; text-align: center;">PREDICTIONS</p>
+																							</td>
+																						</tr>
+																					</table>
+																				</td>
+																				<!--column 3-->
+																				<td class="stack-column stat-column" align="center" style="padding: 0 20px;">
+																					<table role="presentation" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 185px;">
+																						<tr>
+																							<td align="center">
+																								<p style="color:#c6fe67; font-size: 25px; font-weight: 600; text-align: center;">24/7</p>
+																							</td>
+																						</tr>
+																						<tr>
+																							<td align="center">
+																								<p style="color:#a0a0a0; font-size: 18px; text-align: center;">SUPPORT</p>
+																							</td>
+																						</tr>
+																					</table>
+																				</td>
+																			</tr>
+																		</table>
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+												</table>
+
+												<!--API section-->
+												<table align="center" role="presentation" width="80%" border="0" cellpadding="0" cellspacing="0">
+													<tr>
+														<td bg-color="#c6fe67" style="background-color:#c6fe67; padding: 20px; border-radius: 20px;">
+															<table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
+																<tr>
+																	<td align="center">
+																		<p style="color: #000000; font-size: 25px; font-weight: bold;">Ready to scale?</p>
+																	</td>
+																</tr>
+																<tr>
+																	<td align="center" style="padding: 20px;">
+																		<p style="color: #000000; font-size: 18px;">Join over 5,000 developers building the future with NeuralFlow API.</p>
+																	</td>
+																</tr>
+																<tr>
+																	<td align="center" style="padding: 20px;">
+																		<!--outlook button-->
+																		<!--[if mso]>
+																		<table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center">
+																			<tr>
+																				<td align="center">
+																					<v:roundrect 
+																						xmlns:v="urn:schemas-microsoft-com:vml" 
+																						xmlns:w="urn:schemas-microsoft-com:office:word"
+																						href="https://example.com" 
+																						style="height:58px;v-text-anchor:middle;width:160px;"  
+																						arcsize="15%"
+																						stroke="f" 
+																						fillcolor="#000000"> 
+																						<w:anchorlock/> 
+																						<center style="color:#ffffff; font-family: Verdana, Tahoma, sans-serif, Helvetica, sans-serif; font-size:18px; font-weight:normal;">
+																							Get API Key
+																						</center> 
+																					</v:roundrect>
+																				</td>
+																			</tr>
+																		</table>
+																		<![endif]-->
+																		<!--[if !mso]> <!-- -->
+																		<a style="background: #000000; color: #ffffff; padding: 20px; border-radius: 15px; font-size: 18px;" href="https://example.com">Get API Key</a>
+																		<!--<![endif]-->
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+													<!--row spacer-->
+													<tr>
+														<td style="border-bottom: 1px solid #333333;">
+															<table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
+																<tr>
+																	<td height="30" style="font-size:0; line-height:0;">
+																		
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+												</table>
+
+												<!--footer-->
+												<table align="center"  role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
+													<tr>
+														<td>
+															<!--social links table-->
+															<table align="center" role="presentation" border="0" cellpadding="0" cellspacing="0">
+																<tr>
+																	<td align="center" style="padding: 20px;">
+																		<table role="presentation" border="0" cellpadding="0" cellspacing="0">
+																			<tr>
+																				<td style="padding-right: 15px;">
+																					<a  href="https://example.com">
+																						<img src="https://raw.githubusercontent.com/emilywilson-dev/neural-flow-live-images/main/twitter.png" alt="Twitter">
+																					</a>
+																				</td>
+																				<td style="padding-right: 15px;">
+																					<a href="https://example.com">
+																					<img src="https://raw.githubusercontent.com/emilywilson-dev/neural-flow-live-images/main/linkedin.png" alt="LinkedIn">
+																				</a>
+																				</td>
+																				<td>
+																					<a href="https://example.com">
+																						<img src="https://raw.githubusercontent.com/emilywilson-dev/neural-flow-live-images/main/github.png" alt="GitHub">
+																					</a>
+																				</td>
+																			</tr>
+																		</table>
+																		
+																		
+																		
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+													<tr>
+														<td align="center" style="padding-bottom: 10px;">
+															<p>&copy; 2026 NeuralFlow AI Inc. All rights reserved.</p>
+														</td>
+													</tr>
+													<tr>
+														<td align="center">
+															<p>123 Innovation Blvd, San Francisco, CA 94103</p>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<!--links table-->
+															<table width="100%" align="center" role="presentation" border="0" cellpadding="0" cellspacing="0">
+																<tr>
+																	<td align="center" style="padding: 20px;">
+																		<table align="center" role="presentation" border="0" cellpadding="0" cellspacing="0">
+																			<tr>
+																				<td class="stack-column" style="padding-right: 25px;">
+																					<a style="text-decoration: underline; color: #ffffff;" href="https://example.com">
+																						Unsubscribe
+																					</a>
+																				</td>
+																				<td class="stack-column" style="padding-right: 25px;">
+																					<a style="text-decoration: underline; color: #ffffff;" href="https://example.com">
+																						Privacy Policy
+																					</a>
+																				</td>
+																				<td class="stack-column">
+																					<a style="text-decoration: underline; color: #ffffff;" href="https://example.com">
+																						Terms of Service
+																					</a>
+																				</td>
+																			</tr>
+																		</table>
+																		
+																		
+																		
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+												</table>
+
+                     </td>
+                  </tr>
+                </table>
+              </td>
+           </tr>
+      </table>
+  
+  </body>
+</html>
+
+
+
+
